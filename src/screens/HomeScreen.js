@@ -86,7 +86,7 @@ const HomeScreen = ({navigation}) => {
         {popular.map(item => (
           <TouchableOpacity
             key={item.id}
-            onPress={() => navigation.navigate('DetailsScreen')}>
+            onPress={() => navigation.navigate('DetailsScreen',item)}>
             <View style={styles.poplarCard}>
               <View style={styles.poplarCardRight}>
                 <View style={styles.wrapperTitlePopular}>
@@ -103,7 +103,7 @@ const HomeScreen = ({navigation}) => {
                 </View>
 
                 <Text style={[styles.popularCardTextTitle, {marginTop: 20}]}>
-                  Primavera Pizza
+                  {item.name}
                 </Text>
                 <Text style={styles.popularCardWeight}>
                   Weight {item.weight}
@@ -147,7 +147,7 @@ const HomeScreen = ({navigation}) => {
                           fontFamily: 'Montserrat-SemiBold',
                           fontSize: 12,
                         }}>
-                        5.0
+                        {item.rate}
                       </Text>
                     </View>
                   </View>
@@ -156,7 +156,7 @@ const HomeScreen = ({navigation}) => {
               <View style={{flex: 1}}>
                 <Image
                   style={{resizeMode: 'cover'}}
-                  source={require('./../../assets/image/pizza1.png')}
+                  source={item.image}
                 />
               </View>
             </View>
