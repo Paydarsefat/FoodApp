@@ -7,13 +7,16 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import colors from './../../assets/colors/colors';
+import popular from '../../assets/data/popular';
 import categories from './../../assets/data/categories';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import ScrollViewCommands from 'react-native/Libraries/Components/ScrollView/ScrollViewCommands';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+MaterialCommunityIcons.loadFont();
 Feather.loadFont();
 const HomeScreen = ({navigation}) => {
   const renderItem = ({item}) => {
@@ -47,11 +50,11 @@ const HomeScreen = ({navigation}) => {
     );
   };
   return (
-    <View style={{flex: 1}}>
+    <ScrollView style={{flex: 1}}>
       <SafeAreaView style={styles.headerContainer}>
         <Image
           style={styles.profileImage}
-          source={require('./../../assets/image/profile.png')}
+          source={require('./../../assets/image/profileMen.jpg')}
         />
         <TouchableOpacity onPress={() => navigation.navigate('DetailsScreen')}>
           <Feather name="menu" size={24} color="black" />
@@ -80,9 +83,87 @@ const HomeScreen = ({navigation}) => {
 
       <View style={styles.popularContainer}>
         <Text style={styles.popularTitle}>Popular</Text>
-        <View />
+        {popular.map(item => (
+          <TouchableOpacity
+            key={item.id}
+            onPress={() => navigation.navigate('DetailsScreen')}>
+            <View style={styles.poplarCard}>
+              <View style={styles.poplarCardRight}>
+                <View style={styles.wrapperTitlePopular}>
+                  <MaterialCommunityIcons
+                    name="crown"
+                    size={16}
+                    color={colors.primary}
+                  />
+                  <View style={styles.popularCardTitle}>
+                    <Text style={styles.popularCardTextTitle}>
+                      Top of the week
+                    </Text>
+                  </View>
+                </View>
+
+                <Text style={[styles.popularCardTextTitle, {marginTop: 20}]}>
+                  Primavera Pizza
+                </Text>
+                <Text style={styles.popularCardWeight}>
+                  Weight {item.weight}
+                </Text>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginTop: 20,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
+                    <View
+                      style={{
+                        backgroundColor: colors.primary,
+                        alignItems: 'center',
+                        padding: 20,
+                        marginLeft: -20,
+                        borderBottomLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                        flex: 1,
+                      }}>
+                      <Feather name="plus" />
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        padding: 20,
+                      }}>
+                      <MaterialCommunityIcons
+                        name="star"
+                        color="black"
+                        size={10}
+                      />
+                      <Text
+                        style={{
+                          paddingLeft: 5,
+                          fontFamily: 'Montserrat-SemiBold',
+                          fontSize: 12,
+                        }}>
+                        5.0
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={{flex: 1}}>
+                <Image
+                  style={{resizeMode: 'cover'}}
+                  source={require('./../../assets/image/pizza1.png')}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -168,5 +249,32 @@ const styles = StyleSheet.create({
   popularTitle: {
     fontFamily: 'Montserrat-Bold',
     fontSize: 16,
+  },
+  poplarCard: {
+    flexDirection: 'row',
+    backgroundColor: colors.white,
+    borderRadius: 14,
+    marginTop: 10,
+    overflow: 'hidden',
+  },
+  wrapperTitlePopular: {
+    flexDirection: 'row',
+  },
+  popularCardTitle: {
+    marginLeft: 10,
+  },
+  popularCardTextTitle: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 14,
+  },
+  popularCardWeight: {
+    fontFamily: 'Montserrat-medium',
+    fontSize: 12,
+    marginTop: 5,
+    color: colors.gray,
+  },
+  poplarCardRight: {
+    marginTop: 27,
+    paddingLeft: 20,
   },
 });
