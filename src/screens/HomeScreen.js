@@ -8,6 +8,7 @@ import {
   TextInput,
   FlatList,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -20,8 +21,6 @@ MaterialCommunityIcons.loadFont();
 Feather.loadFont();
 const HomeScreen = ({navigation}) => {
   const renderItem = ({item}) => {
-    // let urls = item.imageName;
-    // console.log('url:', urls);
     return (
       <View
         style={[
@@ -56,7 +55,7 @@ const HomeScreen = ({navigation}) => {
           style={styles.profileImage}
           source={require('./../../assets/image/profileMen.jpg')}
         />
-        <TouchableOpacity onPress={() => navigation.navigate('DetailsScreen')}>
+        <TouchableOpacity onPress={() => Alert.alert('Ok you click on menu')}>
           <Feather name="menu" size={24} color="black" />
         </TouchableOpacity>
       </SafeAreaView>
@@ -86,7 +85,7 @@ const HomeScreen = ({navigation}) => {
         {popular.map(item => (
           <TouchableOpacity
             key={item.id}
-            onPress={() => navigation.navigate('DetailsScreen',item)}>
+            onPress={() => navigation.navigate('DetailsScreen', item)}>
             <View style={styles.poplarCard}>
               <View style={styles.poplarCardRight}>
                 <View style={styles.wrapperTitlePopular}>
@@ -118,16 +117,7 @@ const HomeScreen = ({navigation}) => {
                       flexDirection: 'row',
                       alignItems: 'center',
                     }}>
-                    <View
-                      style={{
-                        backgroundColor: colors.primary,
-                        alignItems: 'center',
-                        padding: 20,
-                        marginLeft: -20,
-                        borderBottomLeftRadius: 20,
-                        borderTopRightRadius: 20,
-                        flex: 1,
-                      }}>
+                    <View style={styles.wrapperIconPopularPlus}>
                       <Feather name="plus" />
                     </View>
                     <View
@@ -141,23 +131,13 @@ const HomeScreen = ({navigation}) => {
                         color="black"
                         size={10}
                       />
-                      <Text
-                        style={{
-                          paddingLeft: 5,
-                          fontFamily: 'Montserrat-SemiBold',
-                          fontSize: 12,
-                        }}>
-                        {item.rate}
-                      </Text>
+                      <Text style={styles.textRate}>{item.rate}</Text>
                     </View>
                   </View>
                 </View>
               </View>
               <View style={{flex: 1}}>
-                <Image
-                  style={{resizeMode: 'cover'}}
-                  source={item.image}
-                />
+                <Image style={{resizeMode: 'cover'}} source={item.image} />
               </View>
             </View>
           </TouchableOpacity>
@@ -276,5 +256,19 @@ const styles = StyleSheet.create({
   poplarCardRight: {
     marginTop: 27,
     paddingLeft: 20,
+  },
+  wrapperIconPopularPlus: {
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    padding: 20,
+    marginLeft: -20,
+    borderBottomLeftRadius: 20,
+    borderTopRightRadius: 20,
+    flex: 1,
+  },
+  textRate: {
+    paddingLeft: 5,
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 12,
   },
 });

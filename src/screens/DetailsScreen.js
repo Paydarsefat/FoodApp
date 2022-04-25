@@ -18,15 +18,7 @@ const DetailsScreen = ({navigation, route}) => {
   const {name, image, price, size, deliveryIn, crust} = route.params;
   const renderItem = ({item}) => {
     return (
-      <View
-        style={{
-          justifyContent: 'center',
-          marginHorizontal: 10,
-          marginTop: 19,
-          backgroundColor: colors.white,
-          borderRadius: 14,
-          padding: 10,
-        }}>
+      <View style={styles.wrapperItemImageIngredient}>
         <Image source={item.image} style={{resizeMode: 'cover'}} />
       </View>
     );
@@ -53,91 +45,44 @@ const DetailsScreen = ({navigation, route}) => {
             marginHorizontal: 20,
           }}>
           <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              fontSize: 32,
-              marginTop: 30,
-            }}>
+            style={[
+              styles.textTitle,
+              {
+                marginTop: 30,
+              },
+            ]}>
             {name}
           </Text>
           <View>
             <Text
-              style={{
-                fontFamily: 'Montserrat-Bold',
-                fontSize: 32,
-                marginTop: 15,
-                color: colors.price,
-              }}>
+              style={[styles.textTitle, {marginTop: 15, color: colors.price}]}>
               {price}
             </Text>
           </View>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <View
-            style={{
-              flexDirection: 'column',
-              flexWrap: 'wrap',
-              marginTop: 30,
-              marginHorizontal: 20,
-            }}>
+          <View style={styles.wrapperDetailItem}>
             <View>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: 14,
-                  color: colors.gray,
-                }}>
-                Size
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-SemiBold',
-                  fontSize: 16,
-                  marginTop: 5,
-                  color: colors.textDark,
-                }}>
-                {size}
-              </Text>
+              <Text style={styles.textItemTitleDetail}>Size</Text>
+              <View style={{marginTop: 5}}>
+                <Text style={styles.textItemContentDetail}>{size}</Text>
+              </View>
             </View>
             <View>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: 14,
-                  marginTop: 30,
-                  color: colors.gray,
-                }}>
-                Crust
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-SemiBold',
-                  fontSize: 16,
-                  marginTop: 5,
-                  color: colors.textDark,
-                }}>
-                {crust}
-              </Text>
+              <View style={{marginTop: 30}}>
+                <Text style={[styles.textItemTitleDetail]}>Crust</Text>
+                <View style={{marginTop: 5}}>
+                  <Text style={styles.textItemContentDetail}>{crust}</Text>
+                </View>
+              </View>
             </View>
             <View>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: 14,
-                  marginTop: 30,
-                  color: colors.gray,
-                }}>
-                Delivery in
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-SemiBold',
-                  fontSize: 16,
-                  marginTop: 5,
-                  color: colors.textDark,
-                }}>
-                {deliveryIn}
-              </Text>
+              <View style={{marginTop: 30}}>
+                <Text style={styles.textItemTitleDetail}>Delivery in</Text>
+                <View style={{marginTop: 5}}>
+                  <Text style={styles.textItemContentDetail}>{deliveryIn}</Text>
+                </View>
+              </View>
             </View>
           </View>
           <View style={{justifyContent: 'center', marginTop: 35}}>
@@ -145,13 +90,7 @@ const DetailsScreen = ({navigation, route}) => {
           </View>
         </View>
         <View style={{marginHorizontal: 20, marginTop: 60}}>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-Bold',
-              fontSize: 16,
-            }}>
-            Ingredients
-          </Text>
+          <Text style={styles.textItemContentDetail}>Ingredients</Text>
         </View>
         <View>
           <FlatList
@@ -165,43 +104,26 @@ const DetailsScreen = ({navigation, route}) => {
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <View
             style={{
+              flexDirection: 'row',
               alignItems: 'center',
-              marginTop: 20,
+              marginTop: 80,
             }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: 60,
-              }}>
-              <View
+            <View style={styles.orderButton}>
+              <Text
                 style={{
-                  backgroundColor: colors.primary,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: 20,
-                  marginHorizontal: 20,
-                  borderRadius: 28,
-                  flex: 1,
+                  fontFamily: 'Montserrat-Bold',
+                  fontSize: 14,
                 }}>
-                <Text
-                  style={{
-                    fontFamily: 'Montserrat-Bold',
-                    fontSize: 14,
-                  }}>
-                  Place an order
-                </Text>
-
-                <MaterialIcons
-                  name="arrow-forward-ios"
-                  size={10}
-                  color="black"
-                  style={{
-                    padding: 5,
-                  }}
-                />
-              </View>
+                Place an order
+              </Text>
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={10}
+                color="black"
+                style={{
+                  padding: 5,
+                }}
+              />
             </View>
           </View>
         </TouchableOpacity>
@@ -236,5 +158,43 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 14,
     marginRight: 10,
+  },
+  wrapperItemImageIngredient: {
+    justifyContent: 'center',
+    marginHorizontal: 10,
+    marginTop: 19,
+    backgroundColor: colors.white,
+    borderRadius: 14,
+    padding: 10,
+  },
+  textTitle: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 32,
+  },
+  wrapperDetailItem: {
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    marginTop: 30,
+    marginHorizontal: 20,
+  },
+  textItemTitleDetail: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 14,
+    color: colors.gray,
+  },
+  textItemContentDetail: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 16,
+    color: colors.textDark,
+  },
+  orderButton: {
+    backgroundColor: colors.primary,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    marginHorizontal: 20,
+    borderRadius: 28,
+    flex: 1,
   },
 });
